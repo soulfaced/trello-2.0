@@ -1,14 +1,15 @@
+import { Document } from './node_modules/appwrite/src/models';
 interface Board {
     columns :Map <TypedColumn,Column>
 }
-type TypedColumn = "todo"|"improgress"|"done"
+type TypedColumn = "todo"|"inprogress"|"done"
 
 interface Column{
     id:TypedColumn,
     todos:Todo[]
 }
 
-interface Todo{
+interface Todo extends Models.Document{
     $id:string,
     $createdAt:string,
     title:string,
