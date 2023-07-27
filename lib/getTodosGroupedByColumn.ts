@@ -1,14 +1,13 @@
 import { databases } from "@/appwrite";
-import { Column, TypedColumn, Todo, Image } from "@/typings";
+import { Column, TypedColumn, Todo, Image, Board } from "@/typings";
 
-export const getTodosGroupedByColumn = async () => {
-  try {
+export const getTodosGroupedByColumn = async (): Promise<Board> => {
     const response = await databases.listDocuments(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
       process.env.NEXT_PUBLIC_COLLECTION_ID!
     );
 
-    const todos = response.documents; // Use 'documents' instead of 'Documents'
+    const todos = response.documents;
 
     const columns = todos.reduce((acc, todo) => {
       if (!acc.get(todo.status)) {
@@ -29,21 +28,27 @@ export const getTodosGroupedByColumn = async () => {
       return acc;
     }, new Map<TypedColumn, Column>());
 
+    const columnTypes: TypedColumn[] = ["TODO", "inprogress", "done"];
 
-    console.log(columns);
-    const columnTypes : TypedColumn[]=["TODO","inprogress","done"];
-    for (const columnType of columnTypes){
-        if(!columns.get(columnType)){
-            columns.set(columnType,{
-                id:columnType,
-                todos:[],
-            });
-        }
+    for (const columnType of columnTypes) {
+      if (!columns.get(columnType)) {
+        columns.set(columnType, {
+          id: columnType,
+          todos: []
+        });
+      }
     }
-    console.log(columns);
 
+    const sortedColumns = new Map<TypedColumn, Column>(
+      Array.from(columns.entries()).sort(
+        (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
+      )
+    );
 
-  } catch (error) {
-    console.error('Error fetching todos:', error);
-  }
+    const board: Board = {
+      columns: sortedColumns
+    };
+
+    return board;
+
 };

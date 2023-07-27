@@ -1,4 +1,5 @@
 import { getTodosGroupedByColumn } from '@/lib/getTodosGroupedByColumn';
+import { Board, Column, TypedColumn } from '@/typings';
 import {create} from 'zustand';
 
 interface BoardState{
