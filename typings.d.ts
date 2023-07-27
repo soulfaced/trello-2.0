@@ -2,7 +2,7 @@ import { Document } from './node_modules/appwrite/src/models';
 interface Board {
     columns :Map <TypedColumn,Column>
 }
-type TypedColumn = "todo"|"inprogress"|"done"
+type TypedColumn = "TODO"|"inprogress"|"done"
 
 interface Column{
     id:TypedColumn,

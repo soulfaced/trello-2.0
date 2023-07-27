@@ -31,7 +31,18 @@ export const getTodosGroupedByColumn = async () => {
 
 
     console.log(columns);
-    const ColumnTypes : TypedColumn[]=["todo","inprogress","done"];
+    const columnTypes : TypedColumn[]=["TODO","inprogress","done"];
+    for (const columnType of columnTypes){
+        if(!columns.get(columnType)){
+            columns.set(columnType,{
+                id:columnType,
+                todos:[],
+            });
+        }
+    }
+    console.log(columns);
+
+
   } catch (error) {
     console.error('Error fetching todos:', error);
   }
