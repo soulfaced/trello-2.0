@@ -13,6 +13,12 @@ interface BoardState{
     setSearchString:(searchString: string) => void;
 
     deleteTask:(taskIndex:number,todoId:Todo,id:TypedColumn)=>void;
+
+    newTaskInput:string;
+    setNewTaskInput:(input:string) => void;
+
+    newTaskType:TypedColumn;
+    setNewTaskType:(columnId:TypedColumn) => void;
 }
 
 export const useBoardStore = create<BoardState> ((set,get)=>({
@@ -21,6 +27,7 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
     },
 
     searchString:"",
+    newTaskInput:"",
     setSearchString:(searchString) =>set({searchString}),
 
     getBoard: async()=>{
@@ -47,6 +54,8 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
         );
     },
 
+    setNewTaskInput:((input:string)=>set({newTaskInput:input})),
+
     updateTodoInDB: async(todo,columnId)=>{
         await databases.updateDocument(
             // NEXT_PUBLIC_PROJECTID 
@@ -58,5 +67,8 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
                 status:columnId,
             }
         )
-    }
+    },
+    newTaskType:"TODO",
+    setNewTaskType:(columnId:TypedColumn)=>set({newTaskType:columnId})
+
 }))
