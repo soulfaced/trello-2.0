@@ -4,14 +4,34 @@ import Image from "next/image";
 import {MagnifyingGlassIcon,UserCircleIcon} from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
 import { useBoardStore } from "@/store/BoardStore";
+import { useEffect, useState } from "react";
+import fetchSuggestion from "@/lib/fetchSuggestion";
 
 function Header() 
 {
 
-  const [searchString,setSearchString] = useBoardStore((state)=>[
+  const [board,searchString,setSearchString] = useBoardStore((state)=>[
+    state.board,
     state.searchString,
     state.setSearchString,
-  ])
+  ]);
+
+  const [loading,setLoading] = useState<boolean>(false);
+  const [suggestion,setSuggestion] = useState<string>('');
+
+  useEffect(()=>{
+    if(board.columns.size===0) return;
+
+    const fetchSuggestionFunc = async()=>{
+      const suggestion = await fetchSuggestion(board);
+      setSuggestion(suggestion);
+      setLoading(false);
+    };
+
+    fetchSuggestionFunc();
+
+  },[board])
+
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl">
@@ -55,8 +75,10 @@ function Header()
 
       <div className="flex items-center  justify-center px-5 PY-2 md:py-5">
         <p className=" flex items-center bg-white p-5 text-sm font-light pr-5 shadow-xl rounded-xl w-fit ng-white italic max-w-3xl text-[#005501]">
-          <UserCircleIcon className="inline-block h-10 w-10 text-[##005501] mr-1" />
-          This is GPT summary . data in this field will be added later.
+          <UserCircleIcon className={`inline-block h-10 w-10 text-[##005501] mr-1
+          ${!loading && 'animate-spin'}
+          `} />
+          {suggestion && !loading ? suggestion:"GPT is summering task.."}
         </p>
       </div>
     </header>
