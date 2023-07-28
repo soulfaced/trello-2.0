@@ -32,7 +32,7 @@ function TodoCard(
       }
       fetchImage();
     }
-  })
+  },[todo])
 
   const deleteTask = useBoardStore((state)=>state.deleteTask);
   return (
@@ -50,13 +50,13 @@ function TodoCard(
     </div>
     {/* add image here  */}
     {imageUrl && (
-      <div className="h-full w-full rounded-b-mb">
+      <div className="w-full h-44 rounded-b-mb">
       <Image 
       src={imageUrl }
       alt="task image"
       width={400}
       height={200}
-      className='w-full object-contain rounded-b-md'
+      className='w-full h-44 object-contain rounded-b-md'
       />
       
       </div>

@@ -82,13 +82,13 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
             if(fileUpLoaded){
                 file={
                     bucketId:fileUpLoaded.bucketId,
-                    fileId:fileUpLoaded.$is,
+                    fileId:fileUpLoaded.$id,
                 };
             }
         }
 
        const{$id}= await databases.createDocument(
-            process.env.EXT_PUBLIC_DATABASE_ID!,
+            process.env.NEXT_PUBLIC_DATABASE_ID!,
             process.env.NEXT_PUBLIC_COLLECTION_ID!,
             ID.unique(),
             {
@@ -120,7 +120,7 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
                     todos:[newTodo],
                 });
             } else{
-                newColumns.get(columnId?.todos.push(newTodo))
+                column.todos.push(newTodo);
             }
 
             return{
