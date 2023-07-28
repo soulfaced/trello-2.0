@@ -38,8 +38,8 @@ function Modal() {
           <div className="fixed inset-0 bg-black bg-opacity-50" />
         </Transition.Child>
 
-        <div className='flixed inset-0 overflow-y-auto bg-opacity-50 '>
-        <div className='flex min-h-full items-center justify-center p-4 text-center'>
+        <div className='fixed inset-0 overflow-y-auto bg-opacity-20 '>
+        <div className='flex min-h-full items-center justify-center p-4 text-center '>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -49,25 +49,21 @@ function Modal() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-            <Dialog.Panel className="fixed inset-0 flex items-center justify-center">
-  <div className="bg-white w-full max-w-md p-6 rounded-2xl shadow-xl">
-    <Dialog.Title className="text-lg font-medium loading-6 text-gray-900 pb-2" as="h3">
-      Add a Task
-    </Dialog.Title>
-    <div className="mt-2">
-      <input
-        type="text"
-        value={newTaskInput}
-        onChange={(e) => setNewTaskInput(e.target.value)}
-        placeholder="Enter a task here..."
-        className="w-full border border-gray-300 rounded-md outline-none p-5"
-      />
-    </div>
-
-    <TaskTypeRadioGroup />
-  </div>
-</Dialog.Panel>
-
+            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transistion-all items-center">
+                <Dialog.Title className="text-lg font-medium loading-6 text-gray-900 pb-2" as='h3'>
+                    Add a Task
+                </Dialog.Title>
+                <div className='mt-2'>
+                    <input 
+                        type='text'
+                        value={newTaskInput}
+                        onChange={(e)=>setNewTaskInput(e.target.value)}
+                        placeholder='enter a task here...'
+                        className='w-full boarder border-gray-300 rounded-md outline-none p-5'
+                    />
+                </div>
+                <TaskTypeRadioGroup/>
+            </Dialog.Panel>
         </Transition.Child>
         </div>
         </div>
