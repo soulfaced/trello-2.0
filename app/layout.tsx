@@ -1,3 +1,4 @@
+import Modal from '@/components/Modal'
 import './globals.css'
 // import type { Metadata } from 'next'
 // import { Inter } from 'next/font/google'
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className='bg-[#F5FF8]'>
         {children}
+        <Modal />
       </body>
     </html>
   )
