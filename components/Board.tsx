@@ -4,7 +4,9 @@ import { useBoardStore } from "@/store/BoardStore";
 import { useEffect } from "react";
 import {DragDropContext,DropResult,Droppable} from "react-beautiful-dnd"
 import Column from "./Column";
+import { Todo, TypedColumn } from "@/typings";
 // import { Column } from "@/typings";
+// import { Column, Column, Column } from "@/typings";
 
 function Board() {
     const [board,getBoard,setBoardState,updateTodoInDb] = useBoardStore((state)=>[state.board,state.getBoard,state.setBoardState,state.updateTodoInDB]);
@@ -34,11 +36,17 @@ function Board() {
       const columns = Array.from(board.columns);
       const startColIndex = columns[Number(source.droppableId)];
       const finishColIndex = columns[Number(destination.droppableId)];
-      const startCol : Column ={
+      const startCol : {
+        id:TypedColumn,
+        todos:Todo[]
+    } ={
         id:startColIndex[0],
         todos:startColIndex[1].todos,
       };
-      const finishCol : Column ={
+      const finishCol : {
+        id:TypedColumn,
+        todos:Todo[]
+    } ={
         id:finishColIndex[0],
         todos:finishColIndex[1].todos,
       };
