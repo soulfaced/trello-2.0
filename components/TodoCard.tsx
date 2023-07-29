@@ -5,7 +5,7 @@ import { Todo, TypedColumn } from '@/typings'
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
-import { DraggableProvidedDraggableProps } from 'react-beautiful-dnd';
+import { DraggableProvidedDraggableProps,DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 type Props={
     todo:Todo;
@@ -13,7 +13,7 @@ type Props={
     id:TypedColumn;
     innerRef:(element:HTMLElement|null)=>void;
     draggableProps:DraggableProvidedDraggableProps;
-    dragHandleProps : DraggableProvidedDraggableProps|null|undefined;
+    dragHandleProps :DraggableProvidedDragHandleProps |null|undefined;
 }
 
 function TodoCard(
