@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+website can be used from https://trello-2-0-soulfaced.vercel.app/
+
+this are environment variables :
+NEXT_PUBLIC_DATABASE_ID
+NEXT_PUBLIC_COLLECTION_ID
+NEXT_PUBLIC_BUCKET_ID
+
 ## Getting Started
 
 First, run the development server:
