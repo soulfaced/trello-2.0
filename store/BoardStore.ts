@@ -75,7 +75,10 @@ export const useBoardStore = create<BoardState> ((set,get)=>({
         )
     },
     addTask:async(todo:string,columnId:TypedColumn,image?:File|null)=>{
-        let file : Image |undefined;
+        let file : {
+            bucketId:string,
+            fileId:string,
+        } |undefined;
 
         if (image){
             const fileUpLoaded = await uploadImage(image);

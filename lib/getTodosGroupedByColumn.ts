@@ -9,7 +9,7 @@ export const getTodosGroupedByColumn = async (): Promise<Board> => {
 
     const todos = response.documents;
 
-    const columns = todos.reduce((acc, todo) => {
+    const columns = todos.reduce((acc: { get: (arg0: any) => any; set: (arg0: any, arg1: { id: any; todos: never[]; }) => void; }, todo: { status: any; $id: any; $createdAt: any; title: any; image: string; }) => {
       if (!acc.get(todo.status)) {
         acc.set(todo.status, {
           id: todo.status,
@@ -40,10 +40,11 @@ export const getTodosGroupedByColumn = async (): Promise<Board> => {
     }
 
     const sortedColumns = new Map<TypedColumn, Column>(
-      Array.from(columns.entries()).sort(
+      Array.from<[TypedColumn, Column]>(columns.entries()).sort(
         (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
       )
     );
+    
 
     const board: Board = {
       columns: sortedColumns
